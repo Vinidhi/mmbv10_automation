@@ -132,11 +132,11 @@ def test_cloud_setup_location(driver):
     switch_to_budget_library.click()
     time.sleep(2)
     location_downloaded = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[4]/div/'
-                                                            'div[2]/div[2]/div[23]/div[3]')
+                                                            'div[2]/div[2]/div[2]/div[3]')
     assert location_downloaded.text == location_string
     time.sleep(1)
     select_dowloaded_location = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[4]/div/'
-                                                             'div[2]/div[2]/div[23]/div[1]')
+                                                             'div[2]/div[2]/div[2]/div[1]')
     select_dowloaded_location.click()
     time.sleep(2)
     delete_downloaded_loc = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[4]/div/div[1]/'

@@ -52,7 +52,7 @@ def test_add_global(driver):
     action.double_click(global_calc)
     action.perform()
     global_calc_string = ''.join(random.choices(string.digits, k=2))
-    edit_global_calc = driver.find_element_by_class_name('typeahead')
+    edit_global_calc = driver.find_element_by_class_name('typeahead-input')
     edit_global_calc.send_keys(global_calc_string)
     # self.edit_field(global_calc, global_calc_string, 'cell body type_ahead_with_formula calculation editable ')
 
@@ -62,8 +62,9 @@ def test_add_global(driver):
     action = ActionChains(driver)
     action.double_click(global_unit)
     action.perform()
-    global_unit_string = 'D'
-    edit_global_unit = driver.find_element_by_class_name('typeahead')
+    # global_unit_string = 'D'
+    global_unit_string = '%'
+    edit_global_unit = driver.find_element_by_class_name('typeahead-input')
     time.sleep(2)
     edit_global_unit.send_keys(global_unit_string)
     time.sleep(1)
@@ -76,7 +77,8 @@ def test_add_global(driver):
     time.sleep(2)
     global_value = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[2]/div/div/div[4]/div/'
                                                             'div[2]/div[2]/div[1]/div[10]/span')
-    global_value_string = global_value.text
+    assert global_value.text == global_calc_string + ".00"
+
 
     close_global_setup = driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[2]')
     close_global_setup.click()
@@ -98,19 +100,14 @@ def test_add_global(driver):
     action.double_click(drilldown_to_detail_from_account)
     action.perform()
 
-    driver.switch_to.window(driver.window_handles[0])
-    time.sleep(1)
-
     # amt_field = driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[2]/div[1]/div[1]/div/div[2]/div/'
     #                                               'div[2]/div[1]/div[4]')
-    amt_field = driver.find_element_by_css_selector('div.row.selected.darkCoral > '
-                                                    'div.cell.body.type_ahead_with_formula.amount.editable.read-only > '
-                                                    'div > span > span')
+    amt_field = driver.find_element_by_css_selector('div:nth-child(1) > div.cell.body.type_ahead_with_formula.amount.editable.read-only')
     action = ActionChains(driver)
     action.double_click(amt_field)
     action.perform()
     time.sleep(1)
-    edit_amt_field = driver.find_element_by_class_name('typeahead')
+    edit_amt_field = driver.find_element_by_class_name('typeahead-input')
     time.sleep(2)
     edit_amt_field.clear()
     time.sleep(1)
@@ -118,11 +115,19 @@ def test_add_global(driver):
     time.sleep(2)
     edit_amt_field.send_keys(Keys.TAB)
     time.sleep(2)
-    # amt_field_value = driver.find_element_by_xpath('div.row.selected.darkCoral > '
-    #                                                'div.cell.body.type_ahead_with_formula.amount.editable.read-only > div')
-    amt_field_value = driver.find_element_by_css_selector('div.row.selected.darkCoral > '
-                                                    'div.cell.body.type_ahead_with_formula.amount.editable.read-only > '
-                                                    'div > span > span')
-    amt_field_value.click()
+    assert amt_field.text == global_calc_string + ".00"
+
+def test_delete_global(driver):
+    select_global_setup = driver.find_element_by_css_selector('div.actions.tools-setup > button:nth-child(3)')
+    select_global_setup.click()
     driver.implicitly_wait(5)
-    assert amt_field_value.text == global_value_string
+    driver.switch_to.window(driver.window_handles[1])
+    driver.implicitly_wait(5)
+    delete_global = driver.find_element_by_css_selector('div > div.tools-actions > div > a:nth-child(2) > i')
+    delete_global.click()
+    driver.implicitly_wait(5)
+    select_delete_button = driver.find_element_by_css_selector('div > div.actions > button.ui.basic.button')
+    select_delete_button.click()
+    time.sleep(2)
+    close_setup = driver.find_element_by_css_selector('.ui.small.primary.button')
+    close_setup.click()

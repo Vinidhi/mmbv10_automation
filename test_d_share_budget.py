@@ -6,7 +6,7 @@ import lib.config as config
 def test_budget_share(driver):
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(2)
-   # share_budget = self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[1]/button[2]')
+    #share_budget = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div[1]/button[2]')
     share_budget = driver.find_element_by_xpath('//button[@class = "ui button" and contains(text(),"Send")]')
     share_budget.click()
     # self.driver.implicitly_wait(10)

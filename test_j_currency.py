@@ -13,8 +13,8 @@ def edit_field(driver, field_name, input):
     edit_field.send_keys(Keys.TAB)
     time.sleep(2)
 
-def test_setup_currency_changes(driver):
-    driver.switch_to.window(driver.window_handles[0])
+def test_setup_currency_changes(driver, open_budget):
+    driver.switch_to.window(driver.window_handles[1])
     driver.implicitly_wait(2)
     select_currency_setup = driver.find_element_by_css_selector('div.actions.tools-setup > button:nth-child(5)')
     select_currency_setup.click()
@@ -24,9 +24,15 @@ def test_setup_currency_changes(driver):
     add_currency = driver.find_element_by_css_selector('i.add.square.icon')
     add_currency.click()
     driver.implicitly_wait(5)
-    currency_code = driver.find_element_by_css_selector('input.typeahead')
+    currency_code = driver.find_element_by_css_selector('input.typeahead-input')
     currency_code.send_keys('I')
     driver.implicitly_wait(5)
+    select_currency_IDR = driver.find_element_by_css_selector('div.cell.body.type_ahead.name.editable.edited.field-range'
+                                                              '.field-range-top.field-range-right.field-range-bottom.'
+                                                              'field-range-left.field-range-pivot.read-only > div > div '
+                                                              '> div:nth-child(3)')
+    select_currency_IDR.click()
+    driver.implicitly_wait(10)
     currency_code.send_keys(Keys.TAB)
     driver.implicitly_wait(10)
     currency_description = driver.find_element_by_css_selector('div.content.focused span.ellip.no-select.pre-span')
@@ -73,7 +79,7 @@ def test_setup_currency_changes(driver):
     driver.implicitly_wait(2)
     topsheet_total_first_value = driver.find_element_by_css_selector('div.row.selected > div.cell.body.number.total.'
                                                                      'non-editable.read-only > span:nth-child(1)')
-    assert 'Rp' in topsheet_total_first_value.text
+    assert '﷼' in topsheet_total_first_value.text
 
 
 def test_delete_currency(driver):
@@ -88,3 +94,6 @@ def test_delete_currency(driver):
     delete_currency_confirmation = driver.find_element_by_css_selector('div > div.actions > button.ui.basic.button')
     delete_currency_confirmation.click()
     time.sleep(2)
+    close_currency_setup = driver.find_element_by_css_selector('div.action > button')
+    close_currency_setup.click()
+    time.sleep(1)

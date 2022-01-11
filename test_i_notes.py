@@ -84,32 +84,32 @@ def test_add_note_topsheet(driver):
     add_note.click()
     time.sleep(1)
     add_open_reply_new_edit_delete_note(driver)
+#
+# def test_add_note_account(driver):
+#     action = ActionChains(driver)
+#     select_row = driver.find_element_by_xpath('//span[@class = "no-select" and contains(text(),"1")]')
+#     action.double_click(select_row)
+#     action.perform()
+#     time.sleep(2)
+#     # Open Notes
+#     action = ActionChains(driver)
+#     action.key_down(Keys.CONTROL).key_down(Keys.SHIFT).key_down(Keys.SPACE).key_up(Keys.SPACE).key_up(Keys.SHIFT). \
+#         key_up(Keys.CONTROL).perform()
+#     action.send_keys()
+#     time.sleep(2)
+#     add_open_reply_new_edit_delete_note(driver)
 
-def test_add_note_account(driver):
-    action = ActionChains(driver)
-    select_row = driver.find_element_by_xpath('//span[@class = "no-select" and contains(text(),"1")]')
-    action.double_click(select_row)
-    action.perform()
-    time.sleep(2)
-    # Open Notes
-    action = ActionChains(driver)
-    action.key_down(Keys.CONTROL).key_down(Keys.SHIFT).key_down(Keys.SPACE).key_up(Keys.SPACE).key_up(Keys.SHIFT). \
-        key_up(Keys.CONTROL).perform()
-    action.send_keys()
-    time.sleep(2)
-    add_open_reply_new_edit_delete_note(driver)
-
-def test_add_note_detail(driver):
-    action = ActionChains(driver)
-    select_row = driver.find_element_by_xpath('//span[@class = "no-select" and contains(text(),"1")]')
-    action.double_click(select_row)
-    action.perform()
-    time.sleep(2)
-    # Open Notes
-    action = ActionChains(driver)
-    action.key_down(Keys.CONTROL).key_down(Keys.SHIFT).key_down(Keys.SPACE).key_up(Keys.SPACE).key_up(Keys.SHIFT). \
-        key_up(Keys.CONTROL).perform()
-    action.send_keys()
-    time.sleep(2)
-    add_open_reply_new_edit_delete_note(driver)
+# def test_add_note_detail(driver):
+#     action = ActionChains(driver)
+#     select_row = driver.find_element_by_xpath('//span[@class = "no-select" and contains(text(),"1")]')
+#     action.double_click(select_row)
+#     action.perform()
+#     time.sleep(2)
+#     # Open Notes
+#     action = ActionChains(driver)
+#     action.key_down(Keys.CONTROL).key_down(Keys.SHIFT).key_down(Keys.SPACE).key_up(Keys.SPACE).key_up(Keys.SHIFT). \
+#         key_up(Keys.CONTROL).perform()
+#     action.send_keys()
+#     time.sleep(2)
+#     add_open_reply_new_edit_delete_note(driver)
 
